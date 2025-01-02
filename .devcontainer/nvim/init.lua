@@ -48,7 +48,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   spec = {
     {
-      'goropikari/plugin-template.nvim',
+      'goropikari/lua-repl.nvim',
       dev = true,
       opts = {},
     },
