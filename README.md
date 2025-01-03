@@ -4,7 +4,7 @@ A Neovim plugin that provides a Lua REPL (Read-Eval-Print Loop) environment desi
 
 This plugin was created for personal use and is not particularly optimized for general usability or convenience. It serves as a basic REPL within Neovim to test Lua code interactively.
 
-https://github.com/user-attachments/assets/e6852a42-1fbd-4777-8d18-8e8ddacd48c2
+https://github.com/user-attachments/assets/05c5e74b-88cd-4a32-a8a1-2979bc9424c2
 
 ## Features
 
