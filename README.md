@@ -27,23 +27,21 @@ lazy.nvim:
 
 ### Commands
 
-- `:LuaREPL`: Toggle the Lua REPL interface, opening the prompt and viewer windows.
+- `:LuaREPL`: Toggle the Lua REPL interface, opening the prompt windows.
 
 ### Key Mappings
 
-#### In the **prompt** buffer:
-- `<Ctrl-s>`: Execute the Lua code in the prompt buffer and display the output in the viewer buffer.
-- `q`: Close the REPL interface (both prompt and viewer windows).
+- `<Ctrl-s>`: Execute the Lua code in the prompt buffer
+- `<Ctrl-c>`: Close the REPL interface
+- `<Ctrl-l>`: Clear REPL.
 
-#### In the **viewer** buffer:
-- `q`: Close the REPL interface.
 
 ### Example Workflow
 
 1. Open the Lua REPL interface with `:LuaREPL`.
-2. In the **prompt** buffer (left window), write your Lua code. You can use Neovim-specific Lua functions.
-3. Press `<Ctrl-s>` to execute the code. The output will be displayed in the **viewer** buffer (right window).
-4. Press `q` to close the REPL when done.
+2. Write your Lua code. You can use Neovim-specific Lua functions.
+3. Press `<Ctrl-s>` to execute the code.
+4. Press `<Ctrl-c>` to close the REPL when done.
 
 ## License
 

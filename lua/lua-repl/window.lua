@@ -15,6 +15,8 @@ local function get_windows_for_buffer(bufnr)
   return result
 end
 
+M.get_windows_for_buffer = get_windows_for_buffer
+
 ---@param bufnr number
 function M.move_bottom(bufnr)
   local last_num = vim.api.nvim_buf_line_count(bufnr)
@@ -24,62 +26,43 @@ function M.move_bottom(bufnr)
 end
 
 ---@param prompt_bufnr integer
----@param viewer_bufnr integer
-function M.open(prompt_bufnr, viewer_bufnr)
+function M.open(prompt_bufnr)
   local editor_width = vim.o.columns
   local editor_height = vim.o.lines
 
-  local win_width = math.floor(editor_width * 0.8 / 2) -- 2つ並べるために半分に分割
+  local win_width = math.floor(editor_width * 0.8)
   local win_height = math.floor(editor_height * 0.8)
 
-  local left_win_col = math.floor((editor_width - win_width * 2) / 2)
+  local win_col = math.floor((editor_width - win_width) / 2)
   local win_row = math.floor((editor_height - win_height) / 2)
 
   vim.api.nvim_open_win(prompt_bufnr, true, {
-    title = ' write lua code (send <c-s>) ',
+    title = ' write lua code (send <ctrl-s>, close <ctrl-c>, clear <ctrl-l>) ',
     title_pos = 'center',
     relative = 'editor',
     width = win_width,
     height = win_height,
-    col = left_win_col - 1,
+    col = win_col,
     row = win_row,
-    border = 'single',
-  })
-
-  vim.api.nvim_open_win(viewer_bufnr, false, {
-    title = 'result',
-    title_pos = 'center',
-    relative = 'editor',
-    width = win_width,
-    height = win_height,
-    col = left_win_col + win_width + 1,
-    row = win_row,
-    style = 'minimal',
     border = 'single',
   })
 end
 
 ---@param prompt_bufnr integer
----@param viewer_bufnr integer
-function M.close(prompt_bufnr, viewer_bufnr)
+function M.close(prompt_bufnr)
   for _, winid in ipairs(get_windows_for_buffer(prompt_bufnr)) do
     vim.api.nvim_win_close(winid, true)
   end
-  for _, winid in ipairs(get_windows_for_buffer(viewer_bufnr)) do
-    vim.api.nvim_win_close(winid, true)
-  end
 end
 
 ---@param prompt_bufnr integer
----@param viewer_bufnr integer
-function M.toggle(prompt_bufnr, viewer_bufnr)
+function M.toggle(prompt_bufnr)
   local active = false
   active = active or (#get_windows_for_buffer(prompt_bufnr) > 0)
-  active = active or (#get_windows_for_buffer(viewer_bufnr) > 0)
   if active then
-    M.close(prompt_bufnr, viewer_bufnr)
+    M.close(prompt_bufnr)
   else
-    M.open(prompt_bufnr, viewer_bufnr)
+    M.open(prompt_bufnr)
   end
 end
 
